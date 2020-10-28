@@ -5,30 +5,7 @@ import { isAuthenticated } from 'helpers/authUtils';
 
 const Login = React.lazy(() => import('../pages/auth/Login'));
 const Dashboard = React.lazy(() => import('../pages/dashboard'));
-
-// const authRoutes = {
-//   path: '/account',
-//   name: 'Auth',
-//   component: () => <div>Authentication</div>,
-//   route: Route,
-//   exact: true,
-//   children: [
-//     {
-//       path: '/account/login',
-//       name: 'Login',
-//       component: Login,
-//       route: Route,
-//       exact: false,
-//     },
-//     {
-//       path: '/account/logout',
-//       name: 'Logout',
-//       component: Logout,
-//       route: Route,
-//       exact: false,
-//     },
-//   ],
-// };
+const Places = React.lazy(() => import('../pages/places'));
 
 const indexRoutes = {
   path: '/',
@@ -57,6 +34,30 @@ const dashboardRoutes = {
   exact: true,
 };
 
+const placeRoutes = {
+  path: '/places',
+  name: 'Places',
+  component: Places,
+  route: PrivateRoute,
+  exact: true,
+  children: [
+    {
+      path: '/places/create',
+      name: 'Create Place',
+      component: Places,
+      route: PrivateRoute,
+      exact: true,
+    },
+    {
+      path: '/places/:id',
+      name: 'Edit Place',
+      component: Places,
+      route: PrivateRoute,
+      exact: false,
+    },
+  ],
+};
+
 const flattenRoutes = (routes) => {
   let flatRoutes = [];
   routes = routes || [];
@@ -71,6 +72,6 @@ const flattenRoutes = (routes) => {
 };
 
 const flattenPublicRoutes = flattenRoutes([indexRoutes, loginRoutes]);
-const flattenPrivateRoutes = flattenRoutes([dashboardRoutes]);
+const flattenPrivateRoutes = flattenRoutes([dashboardRoutes, placeRoutes]);
 
 export { flattenPublicRoutes, flattenPrivateRoutes };

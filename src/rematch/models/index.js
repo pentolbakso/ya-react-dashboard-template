@@ -1,3 +1,4 @@
 import auth from './auth';
+import place from './place';
 
-export { auth };
+export { auth, place };
