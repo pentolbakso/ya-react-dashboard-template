@@ -37,8 +37,12 @@ const Dashboard = () => {
           <Box>
             <Heading size={5}>(0) Places</Heading>
             <Button.Group>
-              <Button onClick={() => history.push('/places')}>Browse</Button>
-              <Button onClick={() => history.push('/places/create')}>Create</Button>
+              <Button onClick={() => history.push('/places')} text>
+                Browse
+              </Button>
+              <Button onClick={() => history.push('/places/create')} text>
+                Create
+              </Button>
             </Button.Group>
           </Box>
         </Columns.Column>

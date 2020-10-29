@@ -9,7 +9,7 @@ const http = axios.create({
 
 http.interceptors.request.use(
   (request) => {
-    const token = store.getState().auth.token;
+    const token = store.getState().auth.accessToken;
     if (token && token.length > 0) request.headers.Authorization = `Bearer ${token}`;
     //console.log('REQ:', request.url + ' -> ' + request.data);
     return request;
@@ -47,7 +47,7 @@ http.interceptors.response.use(
       }
     } else if (error.request) {
       // The request was made but no response was received
-      console.log(error.request);
+      //console.log(error.request);
       return Promise.reject({
         message: 'There is problem connecting to server. Please check your connection!',
       });

@@ -9,7 +9,7 @@ const DashboardLayout = ({ children }) => {
   return (
     <Section>
       <Columns centered={true}>
-        <Columns.Column size={6}>
+        <Columns.Column size={8}>
           <Breadcrumbs separator="arrow" style={{ marginBottom: '0.5rem' }} />
           <Suspense fallback={loading()}>{children}</Suspense>
         </Columns.Column>

@@ -4,7 +4,7 @@ import Heading from 'react-bulma-components/lib/components/heading';
 
 const DashboardStats = () => {
   return (
-    <Level breakpoint="mobile">
+    <Level>
       <Level.Item className="has-text-centered">
         <div>
           <Heading heading>Active Orders</Heading>

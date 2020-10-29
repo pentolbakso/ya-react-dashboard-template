@@ -2,6 +2,8 @@ import React from 'react';
 import PrivateRoute from './PrivateRoute';
 import { Redirect, Route } from 'react-router-dom';
 import { isAuthenticated } from 'helpers/authUtils';
+import PlaceForm from 'pages/places/PlaceForm';
+import PlaceDetail from 'pages/places/PlaceDetail';
 
 const Login = React.lazy(() => import('../pages/auth/Login'));
 const Dashboard = React.lazy(() => import('../pages/dashboard'));
@@ -44,16 +46,23 @@ const placeRoutes = {
     {
       path: '/places/create',
       name: 'Create Place',
-      component: Places,
+      component: PlaceForm,
+      route: PrivateRoute,
+      exact: true,
+    },
+    {
+      path: '/places/:id/edit',
+      name: 'Edit Place',
+      component: PlaceForm,
       route: PrivateRoute,
       exact: true,
     },
     {
       path: '/places/:id',
-      name: 'Edit Place',
-      component: Places,
+      name: 'View Place',
+      component: PlaceDetail,
       route: PrivateRoute,
-      exact: false,
+      exact: true,
     },
   ],
 };

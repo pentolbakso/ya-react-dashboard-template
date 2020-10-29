@@ -13,6 +13,11 @@ import { isAuthenticated } from 'helpers/authUtils';
 import { toast } from 'react-toastify';
 
 const Login = () => {
+  const { login } = useRematchDispatch((dispatch) => ({
+    login: dispatch.auth.login,
+  }));
+  const loading = useSelector((state) => state.loading.effects.auth.login);
+
   const { handleSubmit, errors, control } = useForm();
   const onSubmit = async ({ email, password }) => {
     try {
@@ -21,11 +26,6 @@ const Login = () => {
       toast.error(err.message);
     }
   };
-
-  const { login } = useRematchDispatch((dispatch) => ({
-    login: dispatch.auth.login,
-  }));
-  const loading = useSelector((state) => state.loading.effects.auth.login);
 
   if (isAuthenticated()) return <Redirect to="/dashboard" />;
 
