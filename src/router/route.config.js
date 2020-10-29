@@ -2,12 +2,12 @@ import React from 'react';
 import PrivateRoute from './PrivateRoute';
 import { Redirect, Route } from 'react-router-dom';
 import { isAuthenticated } from 'helpers/authUtils';
-import PlaceForm from 'pages/places/PlaceForm';
-import PlaceDetail from 'pages/places/PlaceDetail';
 
 const Login = React.lazy(() => import('../pages/auth/Login'));
 const Dashboard = React.lazy(() => import('../pages/dashboard'));
 const Places = React.lazy(() => import('../pages/places'));
+const PlaceForm = React.lazy(() => import('../pages/places/PlaceForm'));
+const PlaceDetail = React.lazy(() => import('../pages/places/PlaceDetail'));
 
 const indexRoutes = {
   path: '/',
