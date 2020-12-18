@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import Breadcrumb from 'react-bulma-components/lib/components/breadcrumb';
-import { getSiteName } from 'helpers/configUtils';
+// import { getSiteName } from 'helpers/configUtils';
 
 function getBreadcrumbs(path = '') {
   const parts = path.split('/').filter((el) => Boolean(el));
