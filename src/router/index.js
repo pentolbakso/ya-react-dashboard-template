@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { flattenPublicRoutes, flattenPrivateRoutes } from './route.config';
+import { flattenPublicRoutes, flattenPrivateRoutes } from './config';
 import ErrorNotFound from '../pages/other/ErrorNotFound';
 import ProgressLoader from '../components/NProgress';
 
