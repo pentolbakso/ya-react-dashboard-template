@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { isAuthenticated } from 'helpers/authUtils';
 import { toast } from 'react-toastify';
+import { getSiteName } from 'helpers/configUtils';
 
 const Login = () => {
   const { login } = useRematchDispatch((dispatch) => ({
@@ -34,11 +35,11 @@ const Login = () => {
       <Columns centered={true}>
         <Columns.Column size={6}>
           <Container>
-            <Heading>Login</Heading>
+            <Heading>{getSiteName()}</Heading>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Form.Field>
                 <Form.Control>
-                  <Form.Label>Username</Form.Label>
+                  <Form.Label>Email</Form.Label>
                   <Controller
                     as={Form.Input}
                     name="email"

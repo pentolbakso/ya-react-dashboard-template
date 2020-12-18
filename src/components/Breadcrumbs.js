@@ -22,10 +22,10 @@ const Breadcrumbs = (props) => {
       return { name: page, url: to };
     });
 
-  const homepage = { url: '/dashboard', name: getSiteName() };
-  const items = [homepage, ...crumbs];
+  // const homepage = { url: '/dashboard', name: getSiteName() };
+  // const items = [homepage, ...crumbs];
 
-  return <Breadcrumb items={items} renderAs={NavLink} hrefAttr={'to'} {...props} />;
+  return <Breadcrumb items={crumbs} renderAs={NavLink} hrefAttr={'to'} {...props} />;
 };
 
 export default Breadcrumbs;

@@ -5,6 +5,9 @@ import { isAuthenticated } from 'helpers/authUtils';
 
 const Login = React.lazy(() => import('../pages/auth/Login'));
 const Dashboard = React.lazy(() => import('../pages/dashboard'));
+const Users = React.lazy(() => import('../pages/users'));
+const UserForm = React.lazy(() => import('../pages/users/UserForm'));
+const UserDetail = React.lazy(() => import('../pages/users/UserDetail'));
 const Places = React.lazy(() => import('../pages/places'));
 const PlaceForm = React.lazy(() => import('../pages/places/PlaceForm'));
 const PlaceDetail = React.lazy(() => import('../pages/places/PlaceDetail'));
@@ -34,6 +37,37 @@ const dashboardRoutes = {
   component: Dashboard,
   route: PrivateRoute,
   exact: true,
+};
+
+const userRoutes = {
+  path: '/users',
+  name: 'Users',
+  component: Users,
+  route: PrivateRoute,
+  exact: true,
+  children: [
+    {
+      path: '/users/create',
+      name: 'Create User',
+      component: UserForm,
+      route: PrivateRoute,
+      exact: true,
+    },
+    {
+      path: '/users/:id/edit',
+      name: 'Edit User',
+      component: UserForm,
+      route: PrivateRoute,
+      exact: true,
+    },
+    {
+      path: '/users/:id',
+      name: 'View User',
+      component: UserDetail,
+      route: PrivateRoute,
+      exact: true,
+    },
+  ],
 };
 
 const placeRoutes = {
@@ -81,6 +115,6 @@ const flattenRoutes = (routes) => {
 };
 
 const flattenPublicRoutes = flattenRoutes([indexRoutes, loginRoutes]);
-const flattenPrivateRoutes = flattenRoutes([dashboardRoutes, placeRoutes]);
+const flattenPrivateRoutes = flattenRoutes([dashboardRoutes, userRoutes, placeRoutes]);
 
 export { flattenPublicRoutes, flattenPrivateRoutes };
