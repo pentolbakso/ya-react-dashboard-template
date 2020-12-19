@@ -42,14 +42,14 @@ const SidebarMenu = () => {
           Categories
         </MenuItem>
         <MenuItem to="/templates" active={page == 'templates'}>
-          Reply Templates
+          Templates
         </MenuItem>
       </Menu.List>
       <Menu.List title="Whatsapp">
         <MenuItem to="/phone" active={page == 'phone'}>
           Phone
         </MenuItem>
-        <MenuItem to="/wastatus" active={page == 'wastatus'}>
+        <MenuItem to="/logs" active={page == 'wastatus'}>
           Status / Logs
         </MenuItem>
       </Menu.List>

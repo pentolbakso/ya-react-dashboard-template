@@ -51,3 +51,26 @@ export const updateUser = (id, { fullname, email, password, phonenumber, role, e
 export const deleteUser = (id) => {
   return http.delete(`${API_URL}/users/${id}`);
 };
+// ** categories **
+export const getCategories = ({ keyword, skip, limit }) => {
+  return http.get(`${API_URL}/categories`, {
+    params: {
+      $skip: skip,
+      $limit: limit,
+      '$sort[enabled]': -1,
+      '$sort[keyword]': 1,
+    },
+  });
+};
+export const getCategory = (id) => {
+  return http.get(`${API_URL}/categories/${id}`);
+};
+export const createCategory = ({ name, welcomeMessage, enabled, keyword }) => {
+  return http.post(`${API_URL}/categories`, { name, welcomeMessage, enabled, keyword });
+};
+export const updateCategory = (id, { name, welcomeMessage, enabled, keyword }) => {
+  return http.patch(`${API_URL}/categories/${id}`, { name, welcomeMessage, enabled, keyword });
+};
+export const deleteCategory = (id) => {
+  return http.delete(`${API_URL}/categories/${id}`);
+};

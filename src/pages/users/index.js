@@ -7,24 +7,28 @@ import Button from 'react-bulma-components/lib/components/button';
 import * as Form from 'react-bulma-components/lib/components/form';
 import { useSelector } from 'react-redux';
 import useRematchDispatch from 'hooks/useRematchDispatch';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import Loader from 'react-bulma-components/lib/components/loader';
 import Table from 'react-bulma-components/lib/components/table';
 import Pagination from 'react-bulma-components/lib/components/pagination';
+import ActionButton from 'components/ActionButton';
+import { FiEdit, FiTrash2 } from 'react-icons/fi';
+import ToggleInput from 'components/ToggleInput';
 
 const Users = () => {
-  const loading = useSelector(
-    (state) => state.loading.effects.user.getUsers || state.loading.effects.user.getMoreUsers
-  );
+  const history = useHistory();
+  const loading = useSelector((state) => state.loading.effects.user.getUsers);
   const users = useSelector((state) => state.user.items);
   const page = useSelector((state) => state.user.page);
   const total = useSelector((state) => state.user.total);
   const limit = useSelector((state) => state.user.limit);
   const keyword = useSelector((state) => state.user.keyword);
-  const { getUsers } = useRematchDispatch((dispatch) => ({
+  const { getUsers, toggleEnabled, deleteUser } = useRematchDispatch((dispatch) => ({
     getUsers: dispatch.user.getUsers,
+    toggleEnabled: dispatch.user.toggleEnabled,
+    deleteUser: dispatch.user.deleteUser,
   }));
 
   const { handleSubmit, errors, control, setValue } = useForm();
@@ -33,6 +37,17 @@ const Users = () => {
       await getUsers({ keyword: query });
     } catch (err) {
       toast.error(err.message);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure want to delete this item?')) {
+      try {
+        await deleteUser({ id });
+        toast.success('Deleted');
+      } catch (err) {
+        toast.error(err.message);
+      }
     }
   };
 
@@ -87,9 +102,8 @@ const Users = () => {
           <tr>
             <th>Nama</th>
             <th>Email</th>
-            <th>Nomor Telepon</th>
+            <th>Telepon</th>
             <th>Role</th>
-            <th>Aktif</th>
             <th></th>
           </tr>
         </thead>
@@ -101,9 +115,16 @@ const Users = () => {
             <td>{user.email}</td>
             <td>{user.phonenumber}</td>
             <td>{user.role}</td>
-            <td>{user.enabled ? 'Ya' : 'Tidak'}</td>
-            <td>
-              <Link to={`/users/${user._id}/edit`}>Edit</Link>
+            <td class="is-narrow">
+              <ActionButton onClick={() => toggleEnabled({ id: user._id, enabled: !user.enabled })}>
+                <ToggleInput active={user.enabled} />
+              </ActionButton>
+              <ActionButton onClick={() => history.push(`/users/${user._id}/edit`)}>
+                <FiEdit />
+              </ActionButton>
+              <ActionButton onClick={() => handleDelete(user._id)}>
+                <FiTrash2 />
+              </ActionButton>
             </td>
           </tr>
         ))}
@@ -111,7 +132,7 @@ const Users = () => {
       </Table>
       <Pagination
         current={page}
-        total={total > 0 ? Math.floor(total / limit + 1) : 0}
+        total={total > 0 ? Math.ceil(total / limit) : 0}
         delta={2}
         onChange={(page) => getUsers({ page: page })}
       />

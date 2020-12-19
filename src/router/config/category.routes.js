@@ -3,7 +3,6 @@ import PrivateRoute from '../PrivateRoute';
 
 const Categories = React.lazy(() => import('../../pages/categories'));
 const CategoryForm = React.lazy(() => import('../../pages/categories/CategoryForm'));
-const CategoryDetail = React.lazy(() => import('../../pages/categories/CategoryDetail'));
 
 const path = '/categories';
 
@@ -24,13 +23,6 @@ const routes = {
       path: `${path}/:id/edit`,
       name: 'Edit',
       component: CategoryForm,
-      route: PrivateRoute,
-      exact: true,
-    },
-    {
-      path: `${path}/:id`,
-      name: 'View',
-      component: CategoryDetail,
       route: PrivateRoute,
       exact: true,
     },
