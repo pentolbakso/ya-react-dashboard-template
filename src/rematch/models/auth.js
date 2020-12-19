@@ -25,6 +25,11 @@ const auth = {
       this.updateUser(null);
       this.updateAccessToken(null);
     },
+    async updateAccount(params, rootState) {
+      const resp = await api.updateUser(rootState.auth.user._id, params);
+      this.updateUser(resp.data);
+      return resp.data;
+    },
   },
 };
 

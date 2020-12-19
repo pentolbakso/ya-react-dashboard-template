@@ -9,6 +9,7 @@ import customerRoutes from './customer.routes';
 
 const Login = React.lazy(() => import('../../pages/auth/Login'));
 const Dashboard = React.lazy(() => import('../../pages/dashboard'));
+const EditAccount = React.lazy(() => import('../../pages/account/EditAccount'));
 
 const indexRoutes = {
   path: '/',
@@ -37,6 +38,14 @@ const dashboardRoutes = {
   exact: true,
 };
 
+const editAccountRoutes = {
+  path: '/edit-account',
+  name: 'Edit',
+  component: EditAccount,
+  route: PrivateRoute,
+  exact: true,
+};
+
 const flattenRoutes = (routes) => {
   let flatRoutes = [];
   routes = routes || [];
@@ -53,6 +62,7 @@ const flattenRoutes = (routes) => {
 const flattenPublicRoutes = flattenRoutes([indexRoutes, loginRoutes]);
 const flattenPrivateRoutes = flattenRoutes([
   dashboardRoutes,
+  editAccountRoutes,
   userRoutes,
   categoryRoutes,
   templateRoutes,
