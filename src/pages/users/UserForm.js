@@ -72,7 +72,7 @@ const UserForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Nama</Form.Label>
+            <Form.Label>Nama *</Form.Label>
             <Controller
               as={Form.Input}
               name="fullname"
@@ -85,7 +85,7 @@ const UserForm = () => {
         </Form.Field>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Role</Form.Label>
+            <Form.Label>Role *</Form.Label>
             <SelectController name="role" control={control} defaultValue="operator" options={roles} />
           </Form.Control>
         </Form.Field>
@@ -97,14 +97,20 @@ const UserForm = () => {
         </Form.Field>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Email (untuk login)</Form.Label>
-            <Controller as={Form.Input} name="email" placeholder="fulan@gmail.com" control={control} />
+            <Form.Label>Email (untuk login) *</Form.Label>
+            <Controller
+              as={Form.Input}
+              name="email"
+              placeholder="fulan@gmail.com"
+              control={control}
+              rules={{ required: true }}
+            />
           </Form.Control>
           {errors.email && <Form.Help color="danger">Please input a valid value</Form.Help>}
         </Form.Field>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Password {id ? '(kosongkan jika tidak ingin diupdate)' : ''}</Form.Label>
+            <Form.Label>Password {id ? '(kosongkan jika tidak ingin diupdate)' : '*'}</Form.Label>
             <Controller as={Form.Input} name="password" type="password" control={control} rules={{ required: !id }} />
           </Form.Control>
           {errors.password && <Form.Help color="danger">Please input a valid value</Form.Help>}

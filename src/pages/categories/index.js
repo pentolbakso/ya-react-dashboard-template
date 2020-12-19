@@ -1,7 +1,6 @@
 import React from 'react';
 import Container from 'react-bulma-components/lib/components/container';
 import Heading from 'react-bulma-components/lib/components/heading';
-import List from 'react-bulma-components/lib/components/list';
 import Level from 'react-bulma-components/lib/components/level';
 import Button from 'react-bulma-components/lib/components/button';
 import { useSelector } from 'react-redux';
@@ -93,7 +92,7 @@ const Users = () => {
             </td>
           </tr>
         ))}
-        {categories.length == 0 && !loading && <List.Item>Data Not Found</List.Item>}
+        {categories.length == 0 && !loading && <p>Data Not Found</p>}
       </Table>
       <Pagination
         current={page}

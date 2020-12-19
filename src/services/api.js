@@ -74,3 +74,27 @@ export const updateCategory = (id, { name, welcomeMessage, enabled, keyword }) =
 export const deleteCategory = (id) => {
   return http.delete(`${API_URL}/categories/${id}`);
 };
+// ** templates **
+export const getTemplates = ({ keyword, skip, limit }) => {
+  return http.get(`${API_URL}/templates`, {
+    params: {
+      'name[$search]': keyword && keyword.length > 0 ? keyword : null,
+      $skip: skip,
+      $limit: limit,
+      '$sort[enabled]': -1,
+      '$sort[name]': 1,
+    },
+  });
+};
+export const getTemplate = (id) => {
+  return http.get(`${API_URL}/templates/${id}`);
+};
+export const createTemplate = ({ name, text, notes }) => {
+  return http.post(`${API_URL}/templates`, { name, text, notes });
+};
+export const updateTemplate = (id, { name, text, notes, enabled }) => {
+  return http.patch(`${API_URL}/templates/${id}`, { name, text, notes, enabled });
+};
+export const deleteTemplate = (id) => {
+  return http.delete(`${API_URL}/templates/${id}`);
+};

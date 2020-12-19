@@ -15,25 +15,45 @@ import Pagination from 'react-bulma-components/lib/components/pagination';
 import ActionButton from 'components/ActionButton';
 import { FiEdit, FiTrash2 } from 'react-icons/fi';
 import ToggleInput from 'components/ToggleInput';
+import dayjs from 'dayjs';
 
-const Users = () => {
+const ExpandableLink = ({ name, content, timestamp }) => {
+  const [toggle, setToggle] = React.useState(false);
+  return (
+    <div>
+      <a onClick={() => setToggle(!toggle)}>{name}</a>
+      {toggle && (
+        <>
+          <div style={{ marginTop: 10 }}>
+            <pre>{content}</pre>
+          </div>
+          <div className="is-size-7 has-text-right has-text-grey">
+            Terakhir diupdate: {dayjs(timestamp).format('DD-MMM HH:mm')}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+const Templates = () => {
   const history = useHistory();
-  const loading = useSelector((state) => state.loading.effects.user.getUsers);
-  const users = useSelector((state) => state.user.items);
-  const page = useSelector((state) => state.user.page);
-  const total = useSelector((state) => state.user.total);
-  const limit = useSelector((state) => state.user.limit);
-  const keyword = useSelector((state) => state.user.keyword);
-  const { getUsers, toggleEnabled, deleteUser } = useRematchDispatch((dispatch) => ({
-    getUsers: dispatch.user.getUsers,
-    toggleEnabled: dispatch.user.toggleEnabled,
-    deleteUser: dispatch.user.deleteUser,
+  const loading = useSelector((state) => state.loading.effects.template.getTemplates);
+  const templates = useSelector((state) => state.template.items);
+  const page = useSelector((state) => state.template.page);
+  const total = useSelector((state) => state.template.total);
+  const limit = useSelector((state) => state.template.limit);
+  const keyword = useSelector((state) => state.template.keyword);
+  const { getTemplates, toggleEnabled, deleteTemplate } = useRematchDispatch((dispatch) => ({
+    getTemplates: dispatch.template.getTemplates,
+    toggleEnabled: dispatch.template.toggleEnabled,
+    deleteTemplate: dispatch.template.deleteTemplate,
   }));
 
   const { handleSubmit, errors, control, setValue } = useForm();
   const onSearch = async ({ query }) => {
     try {
-      await getUsers({ keyword: query });
+      await getTemplates({ keyword: query });
     } catch (err) {
       toast.error(err.message);
     }
@@ -42,7 +62,7 @@ const Users = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure want to delete this item?')) {
       try {
-        await deleteUser({ id });
+        await deleteTemplate({ id });
         toast.success('Deleted');
       } catch (err) {
         toast.error(err.message);
@@ -51,7 +71,7 @@ const Users = () => {
   };
 
   React.useEffect(() => {
-    getUsers({ keyword: '' });
+    getTemplates({ keyword: '' });
   }, []);
 
   React.useEffect(() => {
@@ -63,12 +83,12 @@ const Users = () => {
       <Level>
         <Level.Side align="left">
           <Level.Item>
-            <Heading weight="light">Users</Heading>
+            <Heading weight="light">Templates</Heading>
           </Level.Item>
         </Level.Side>
         <Level.Side align="right">
           <Level.Item>
-            <Link to={`/users/create`}>
+            <Link to={`/templates/create`}>
               <Button color="primary">Create</Button>
             </Link>
           </Level.Item>
@@ -85,7 +105,7 @@ const Users = () => {
               <a
                 href="javascript:void(0)"
                 onClick={() => {
-                  getUsers({ keyword: '' });
+                  getTemplates({ keyword: '' });
                 }}
               >
                 (reset)
@@ -97,43 +117,32 @@ const Users = () => {
         </p>
       </form>
       <Table bordered>
-        <thead>
-          <tr>
-            <th>Nama</th>
-            <th>Email</th>
-            <th>Telepon</th>
-            <th>Role</th>
-            <th></th>
-          </tr>
-        </thead>
-        {users.map((user) => (
+        {templates.map((tmp) => (
           <tr>
             <td>
-              <Link to={`/users/${user._id}`}>{user.fullname}</Link>
+              {/* <Link to={`/templates/${tmp._id}`}>{tmp.name}</Link> */}
+              <ExpandableLink name={tmp.name} content={tmp.text} timestamp={tmp.updatedAt} />
             </td>
-            <td>{user.email}</td>
-            <td>{user.phonenumber}</td>
-            <td>{user.role}</td>
             <td class="is-narrow">
-              <ActionButton onClick={() => toggleEnabled({ id: user._id, enabled: !user.enabled })}>
-                <ToggleInput active={user.enabled} />
+              <ActionButton onClick={() => toggleEnabled({ id: tmp._id, enabled: !tmp.enabled })}>
+                <ToggleInput active={tmp.enabled} />
               </ActionButton>
-              <ActionButton onClick={() => history.push(`/users/${user._id}/edit`)}>
+              <ActionButton onClick={() => history.push(`/templates/${tmp._id}/edit`)}>
                 <FiEdit />
               </ActionButton>
-              <ActionButton onClick={() => handleDelete(user._id)}>
+              <ActionButton onClick={() => handleDelete(tmp._id)}>
                 <FiTrash2 />
               </ActionButton>
             </td>
           </tr>
         ))}
-        {users.length == 0 && !loading && <p>Data Not Found</p>}
+        {templates.length == 0 && !loading && <p>Data Not Found</p>}
       </Table>
       <Pagination
         current={page}
         total={total > 0 ? Math.ceil(total / limit) : 0}
         delta={2}
-        onChange={(page) => getUsers({ page: page })}
+        onChange={(page) => getTemplates({ page: page })}
       />
       {loading && (
         <p>
@@ -144,4 +153,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Templates;
