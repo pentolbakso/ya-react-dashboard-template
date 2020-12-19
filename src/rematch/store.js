@@ -5,7 +5,7 @@ import storage from 'redux-persist/lib/storage';
 import * as models from './models';
 
 const persistConfig = {
-  key: 'webappname',
+  key: 'tsl-chat',
   whitelist: ['auth'],
   storage,
   version: 1,

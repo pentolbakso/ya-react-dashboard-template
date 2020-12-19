@@ -7,8 +7,6 @@ import { useForm, Controller } from 'react-hook-form';
 import useRematchDispatch from '../../hooks/useRematchDispatch';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { useHistory } from 'react-router-dom';
 
 const EditAccount = () => {
   const { updateAccount } = useRematchDispatch((dispatch) => ({
