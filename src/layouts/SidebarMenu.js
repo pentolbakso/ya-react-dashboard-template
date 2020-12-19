@@ -34,6 +34,14 @@ const SidebarMenu = () => {
           Customers
         </MenuItem>
       </Menu.List>
+      <Menu.List title="Whatsapp">
+        <MenuItem to="/phone" active={page == 'phone'}>
+          Settings
+        </MenuItem>
+        <MenuItem to="/logs" active={page == 'wastatus'}>
+          Logs
+        </MenuItem>
+      </Menu.List>
       <Menu.List title="Master Data">
         <MenuItem to="/users" active={page == 'users'}>
           Users
@@ -43,14 +51,6 @@ const SidebarMenu = () => {
         </MenuItem>
         <MenuItem to="/templates" active={page == 'templates'}>
           Templates
-        </MenuItem>
-      </Menu.List>
-      <Menu.List title="Whatsapp">
-        <MenuItem to="/phone" active={page == 'phone'}>
-          Phone
-        </MenuItem>
-        <MenuItem to="/logs" active={page == 'wastatus'}>
-          Status / Logs
         </MenuItem>
       </Menu.List>
       <Menu.List title="Account">

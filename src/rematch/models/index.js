@@ -3,5 +3,6 @@ import auth from './auth';
 import user from './user';
 import category from './category';
 import template from './template';
+import customer from './customer';
 
-export { auth, user, category, template };
+export { auth, user, category, template, customer };

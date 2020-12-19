@@ -5,6 +5,7 @@ import { isAuthenticated } from 'helpers/authUtils';
 import userRoutes from './user.routes';
 import categoryRoutes from './category.routes';
 import templateRoutes from './template.routes';
+import customerRoutes from './customer.routes';
 
 const Login = React.lazy(() => import('../../pages/auth/Login'));
 const Dashboard = React.lazy(() => import('../../pages/dashboard'));
@@ -50,6 +51,12 @@ const flattenRoutes = (routes) => {
 };
 
 const flattenPublicRoutes = flattenRoutes([indexRoutes, loginRoutes]);
-const flattenPrivateRoutes = flattenRoutes([dashboardRoutes, userRoutes, categoryRoutes, templateRoutes]);
+const flattenPrivateRoutes = flattenRoutes([
+  dashboardRoutes,
+  userRoutes,
+  categoryRoutes,
+  templateRoutes,
+  customerRoutes,
+]);
 
 export { flattenPublicRoutes, flattenPrivateRoutes };

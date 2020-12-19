@@ -51,6 +51,49 @@ export const updateUser = (id, { fullname, email, password, phonenumber, role, e
 export const deleteUser = (id) => {
   return http.delete(`${API_URL}/users/${id}`);
 };
+// ** customers **
+export const getCustomers = ({ keyword, skip, limit }) => {
+  return http.get(`${API_URL}/customers`, {
+    params: {
+      'fullname[$search]': keyword && keyword.length > 0 ? keyword : null,
+      $skip: skip,
+      $limit: limit,
+      '$sort[fullname]': 1,
+    },
+  });
+};
+export const getCustomer = (id) => {
+  return http.get(`${API_URL}/customers/${id}`);
+};
+export const createCustomer = ({ fullname, phonenumber, gender, city, bornYear, job, education, tags, notes }) => {
+  return http.post(`${API_URL}/customers`, {
+    fullname,
+    phonenumber,
+    gender,
+    city,
+    bornYear,
+    job,
+    education,
+    tags,
+    notes,
+  });
+};
+export const updateCustomer = (id, { fullname, phonenumber, gender, city, bornYear, job, education, tags, notes }) => {
+  return http.patch(`${API_URL}/customers/${id}`, {
+    fullname,
+    phonenumber,
+    gender,
+    city,
+    bornYear,
+    job,
+    education,
+    tags,
+    notes,
+  });
+};
+export const deleteCustomer = (id) => {
+  return http.delete(`${API_URL}/customers/${id}`);
+};
 // ** categories **
 export const getCategories = ({ keyword, skip, limit }) => {
   return http.get(`${API_URL}/categories`, {
