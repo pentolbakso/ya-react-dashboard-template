@@ -64,12 +64,12 @@ const CustomerDetail = () => {
         </Level.Side>
       </Level>
       <List>
-        <ListMeta label="Nomor telpon" value={current?.phonenumber} />
-        <ListMeta label="Umur" value={calculateAge(current?.bornYear)} />
-        <ListMeta label="Jenis kelamin" value={current?.gender} />
-        <ListMeta label="Kota domisili" value={current?.city} />
-        <ListMeta label="Pekerjaan" value={current?.job} />
-        <ListMeta label="Pendidikan terakhir" value={current?.education} />
+        <ListMeta label="Phonenumber" value={current?.phonenumber} />
+        <ListMeta label="Age" value={calculateAge(current?.bornYear)} />
+        <ListMeta label="Gender" value={current?.gender} />
+        <ListMeta label="City" value={current?.city} />
+        <ListMeta label="Job" value={current?.job} />
+        <ListMeta label="Education" value={current?.education} />
         <ListMeta label="Tags" value={current?.tags} />
         <ListMeta label="Notes" value={current?.notes} />
         <ListMeta label="Created At" value={dayjs(current?.createdAt).toString()} />

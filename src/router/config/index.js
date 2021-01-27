@@ -3,15 +3,11 @@ import PrivateRoute from '../PrivateRoute';
 import { Redirect, Route } from 'react-router-dom';
 import { isAuthenticated } from 'helpers/authUtils';
 import userRoutes from './user.routes';
-import categoryRoutes from './category.routes';
-import templateRoutes from './template.routes';
 import customerRoutes from './customer.routes';
-import chatRoutes from './chat.routes';
 
 const Login = React.lazy(() => import('../../pages/auth/Login'));
 const Dashboard = React.lazy(() => import('../../pages/dashboard'));
 const EditAccount = React.lazy(() => import('../../pages/account/EditAccount'));
-const Whatsapp = React.lazy(() => import('../../pages/whatsapp'));
 
 const indexRoutes = {
   path: '/',
@@ -40,14 +36,6 @@ const dashboardRoutes = {
   exact: true,
 };
 
-const whatsappRoutes = {
-  path: '/whatsapp',
-  name: 'whatsapp',
-  component: Whatsapp,
-  route: PrivateRoute,
-  exact: true,
-};
-
 const editAccountRoutes = {
   path: '/edit-account',
   name: 'Edit',
@@ -70,15 +58,6 @@ const flattenRoutes = (routes) => {
 };
 
 const flattenPublicRoutes = flattenRoutes([indexRoutes, loginRoutes]);
-const flattenPrivateRoutes = flattenRoutes([
-  dashboardRoutes,
-  editAccountRoutes,
-  userRoutes,
-  categoryRoutes,
-  templateRoutes,
-  customerRoutes,
-  chatRoutes,
-  whatsappRoutes,
-]);
+const flattenPrivateRoutes = flattenRoutes([dashboardRoutes, editAccountRoutes, userRoutes, customerRoutes]);
 
 export { flattenPublicRoutes, flattenPrivateRoutes };

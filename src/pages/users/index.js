@@ -76,7 +76,13 @@ const Users = () => {
       </Level>
       <form onSubmit={handleSubmit(onSearch)}>
         <Form.Control style={{ marginBottom: '1rem' }}>
-          <Controller as={Form.Input} name="query" placeholder="Cari..." control={control} className="is-shadowless" />
+          <Controller
+            as={Form.Input}
+            name="query"
+            placeholder="Search..."
+            control={control}
+            className="is-shadowless"
+          />
         </Form.Control>
         <p style={{ marginBottom: '0.5rem' }} className="is-size-6">
           {keyword ? (
@@ -99,9 +105,9 @@ const Users = () => {
       <Table bordered>
         <thead>
           <tr>
-            <th>Nama</th>
+            <th>Name</th>
             <th>Email</th>
-            <th>Telepon</th>
+            <th>Phonenumber</th>
             <th>Role</th>
             <th></th>
           </tr>

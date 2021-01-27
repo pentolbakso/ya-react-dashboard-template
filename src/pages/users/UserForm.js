@@ -72,7 +72,7 @@ const UserForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Nama *</Form.Label>
+            <Form.Label>Fullname *</Form.Label>
             <Controller
               as={Form.Input}
               name="fullname"
@@ -91,13 +91,13 @@ const UserForm = () => {
         </Form.Field>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Nomor Telpon</Form.Label>
+            <Form.Label>Phonenumber</Form.Label>
             <Controller as={Form.Input} name="phonenumber" placeholder="misal: 62812112233" control={control} />
           </Form.Control>
         </Form.Field>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Email (untuk login) *</Form.Label>
+            <Form.Label>Email (for login) *</Form.Label>
             <Controller
               as={Form.Input}
               name="email"
@@ -110,7 +110,7 @@ const UserForm = () => {
         </Form.Field>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Password {id ? '(kosongkan jika tidak ingin diupdate)' : '*'}</Form.Label>
+            <Form.Label>Password {id ? '(fill blank if you dont want to change the password)' : '*'}</Form.Label>
             <Controller as={Form.Input} name="password" type="password" control={control} rules={{ required: !id }} />
           </Form.Control>
           {errors.password && <Form.Help color="danger">Please input a valid value</Form.Help>}

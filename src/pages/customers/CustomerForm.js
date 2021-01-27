@@ -17,11 +17,11 @@ const genders = [
     value: '',
   },
   {
-    label: 'Laki-Laki',
+    label: 'Male',
     value: 'male',
   },
   {
-    label: 'Perempuan',
+    label: 'Female',
     value: 'female',
   },
 ];
@@ -75,24 +75,18 @@ const CustomerForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Nama *</Form.Label>
-            <Controller
-              as={Form.Input}
-              name="fullname"
-              placeholder="misal: Abu Yahya"
-              control={control}
-              rules={{ required: true }}
-            />
+            <Form.Label>Fullname *</Form.Label>
+            <Controller as={Form.Input} name="fullname" placeholder="" control={control} rules={{ required: true }} />
           </Form.Control>
           {errors.fullname && <Form.Help color="danger">Please input a valid value</Form.Help>}
         </Form.Field>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Nomor Telpon *</Form.Label>
+            <Form.Label>Phonenumber *</Form.Label>
             <Controller
               as={Form.Input}
               name="phonenumber"
-              placeholder="misal: 62812112233"
+              placeholder=""
               control={control}
               rules={{ required: true }}
             />
@@ -101,38 +95,38 @@ const CustomerForm = () => {
         </Form.Field>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Jenis kelamin</Form.Label>
+            <Form.Label>Gender</Form.Label>
             <SelectController name="gender" control={control} defaultValue="" options={genders} />
           </Form.Control>
         </Form.Field>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Kota Domisili</Form.Label>
+            <Form.Label>City</Form.Label>
             <Controller as={Form.Input} name="city" placeholder="" control={control} />
           </Form.Control>
         </Form.Field>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Pekerjaan</Form.Label>
+            <Form.Label>Job</Form.Label>
             <Controller as={Form.Input} name="job" placeholder="" control={control} />
           </Form.Control>
         </Form.Field>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Pendidikan Terakhir</Form.Label>
+            <Form.Label>Education</Form.Label>
             <Controller as={Form.Input} name="education" placeholder="" control={control} />
           </Form.Control>
         </Form.Field>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Tahun Kelahiran</Form.Label>
+            <Form.Label>Born Year</Form.Label>
             <Controller as={Form.Input} name="bornYear" placeholder="" control={control} />
           </Form.Control>
         </Form.Field>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Catatan</Form.Label>
-            <Controller as={Form.Textarea} name="notes" placeholder="Catatan ttg customer jika ada" control={control} />
+            <Form.Label>Notes</Form.Label>
+            <Controller as={Form.Textarea} name="notes" placeholder="Optional" control={control} />
           </Form.Control>
         </Form.Field>
         <Form.Control>

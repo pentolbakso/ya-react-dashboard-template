@@ -39,21 +39,15 @@ const EditAccount = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Nama *</Form.Label>
-            <Controller
-              as={Form.Input}
-              name="fullname"
-              placeholder="misal: Abu Yahya"
-              control={control}
-              rules={{ required: true }}
-            />
+            <Form.Label>Fullname *</Form.Label>
+            <Controller as={Form.Input} name="fullname" placeholder="" control={control} rules={{ required: true }} />
           </Form.Control>
           {errors.fullname && <Form.Help color="danger">Please input a valid value</Form.Help>}
         </Form.Field>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Nomor Telpon</Form.Label>
-            <Controller as={Form.Input} name="phonenumber" placeholder="misal: 62812112233" control={control} />
+            <Form.Label>Phonenumber</Form.Label>
+            <Controller as={Form.Input} name="phonenumber" placeholder="" control={control} />
           </Form.Control>
         </Form.Field>
         <Form.Field>
@@ -70,7 +64,7 @@ const EditAccount = () => {
         </Form.Field>
         <Form.Field>
           <Form.Control>
-            <Form.Label>Password (kosongkan jika tidak ingin merubah password)</Form.Label>
+            <Form.Label>Password (input only if you want to change the password)</Form.Label>
             <Controller as={Form.Input} name="password" type="password" control={control} />
           </Form.Control>
         </Form.Field>

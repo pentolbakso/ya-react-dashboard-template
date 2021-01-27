@@ -65,8 +65,8 @@ const UserDetail = () => {
       <List>
         <ListMeta label="Role" value={current?.role} />
         <ListMeta label="Email" value={current?.email} />
-        <ListMeta label="Nomor Telpon" value={current?.phonenumber} />
-        <ListMeta label="Aktif" value={current?.enabled ? 'Ya' : 'Tidak'} />
+        <ListMeta label="Phonenumber" value={current?.phonenumber} />
+        <ListMeta label="Active" value={current?.enabled ? 'Yes' : 'No'} />
         <ListMeta label="Created At" value={dayjs(current?.createdAt).toString()} />
         <ListMeta label="Updated At" value={dayjs(current?.updatedAt).toString()} />
       </List>
