@@ -141,3 +141,27 @@ export const updateTemplate = (id, { name, text, notes, enabled }) => {
 export const deleteTemplate = (id) => {
   return http.delete(`${API_URL}/templates/${id}`);
 };
+// ** chats **
+export const getChats = ({ keyword, skip, limit }) => {
+  return http.get(`${API_URL}/chats`, {
+    params: {
+      // 'fullname[$search]': keyword && keyword.length > 0 ? keyword : null,
+      $skip: skip,
+      $limit: limit,
+      '$sort[createdAt]': 1,
+      $populate: ['operator', 'customer', 'category'],
+    },
+  });
+};
+export const getChat = (id) => {
+  return http.get(`${API_URL}/chats/${id}`);
+};
+export const createChat = ({ category, customer, state, unread, operator, tags }) => {
+  return http.post(`${API_URL}/chats`, { category, customer, state, unread, operator, tags });
+};
+export const updateChat = (id, { category, customer, state, unread, operator, tags }) => {
+  return http.patch(`${API_URL}/chats/${id}`, { category, customer, state, unread, operator, tags });
+};
+export const deleteChat = (id) => {
+  return http.delete(`${API_URL}/chats/${id}`);
+};

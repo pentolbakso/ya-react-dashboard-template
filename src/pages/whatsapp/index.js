@@ -8,9 +8,8 @@ import dayjs from 'dayjs';
 import useRematchDispatch from 'hooks/useRematchDispatch';
 import Button from 'react-bulma-components/lib/components/button';
 import { useHistory } from 'react-router-dom';
-import DashboardStats from './DashboardStats';
 
-const Dashboard = () => {
+const Whatsapp = () => {
   const history = useHistory();
   const user = useSelector((state) => state.auth.user);
   const { logout } = useRematchDispatch((dispatch) => ({
@@ -19,41 +18,20 @@ const Dashboard = () => {
 
   return (
     <Container>
-      <Heading className="has-text-weight-light">Dashboard</Heading>
-      <Heading subtitle>
-        {dayjs().format('D MMM')}, {user?.fullname} (
-        <a href="#" onClick={() => logout()}>
-          Logout
-        </a>
-        )
-      </Heading>
+      <Heading className="has-text-weight-light">Whatsapp</Heading>
       <Columns multiline>
-        <Columns.Column size={12}>
+        <Columns.Column size={6}>
           <Box>
-            <DashboardStats />
+            <Heading size={5}>Nomor Telpon</Heading>
           </Box>
         </Columns.Column>
         <Columns.Column size={6}>
-          <Box>
-            <Heading size={5}>(0) Places</Heading>
-            <Button.Group>
-              <Button onClick={() => history.push('/places')} text>
-                Browse
-              </Button>
-              <Button onClick={() => history.push('/places/create')} text>
-                Create
-              </Button>
-            </Button.Group>
-          </Box>
-        </Columns.Column>
-        <Columns.Column size={6}>
-          <Box>
-            <Heading size={5}>Data</Heading>
-          </Box>
+          <Box>QR Code kalau ada</Box>
         </Columns.Column>
       </Columns>
+      <Heading size={5}>Log terakhir</Heading>
     </Container>
   );
 };
 
-export default Dashboard;
+export default Whatsapp;

@@ -33,24 +33,19 @@ const SidebarMenu = () => {
         <MenuItem to="/" active={page == 'dashboard'}>
           Dashboard
         </MenuItem>
-        <MenuItem to="/places" active={page == 'places'}>
+        <MenuItem to="/chats" active={page == 'chats'}>
           Chats
         </MenuItem>
         <MenuItem to="/customers" active={page == 'customers'}>
           Customers
         </MenuItem>
-      </Menu.List>
-      <Menu.List title="Whatsapp">
-        <MenuItem to="/phone" active={page == 'phone'}>
-          Settings
-        </MenuItem>
-        <MenuItem to="/logs" active={page == 'wastatus'}>
-          Logs
+        <MenuItem to="/whatsapp" active={page == 'whatsapp'}>
+          Whatsapp
         </MenuItem>
       </Menu.List>
-      <Menu.List title="Master Data">
+      <Menu.List title="Settings">
         <MenuItem to="/users" active={page == 'users'}>
-          Users
+          Operator
         </MenuItem>
         <MenuItem to="/categories" active={page == 'categories'}>
           Categories

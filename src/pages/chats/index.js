@@ -17,43 +17,23 @@ import { FiEdit, FiTrash2 } from 'react-icons/fi';
 import ToggleInput from 'components/ToggleInput';
 import dayjs from 'dayjs';
 
-const ExpandableLink = ({ name, content, timestamp }) => {
-  const [toggle, setToggle] = React.useState(false);
-  return (
-    <div>
-      <a onClick={() => setToggle(!toggle)}>{name}</a>
-      {toggle && (
-        <>
-          <div style={{ marginTop: 10 }}>
-            <pre>{content}</pre>
-          </div>
-          <div className="is-size-7 has-text-right has-text-grey">
-            Terakhir diupdate: {dayjs(timestamp).format('DD-MMM-YYYY HH:mm')}
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
-
-const Templates = () => {
+const Chats = () => {
   const history = useHistory();
-  const loading = useSelector((state) => state.loading.effects.template.getTemplates);
-  const templates = useSelector((state) => state.template.items);
-  const page = useSelector((state) => state.template.page);
-  const total = useSelector((state) => state.template.total);
-  const limit = useSelector((state) => state.template.limit);
-  const keyword = useSelector((state) => state.template.keyword);
-  const { getTemplates, toggleEnabled, deleteTemplate } = useRematchDispatch((dispatch) => ({
-    getTemplates: dispatch.template.getTemplates,
-    toggleEnabled: dispatch.template.toggleEnabled,
-    deleteTemplate: dispatch.template.deleteTemplate,
+  const loading = useSelector((state) => state.loading.effects.chat.getChats);
+  const chats = useSelector((state) => state.chat.items);
+  const page = useSelector((state) => state.chat.page);
+  const total = useSelector((state) => state.chat.total);
+  const limit = useSelector((state) => state.chat.limit);
+  const keyword = useSelector((state) => state.chat.keyword);
+  const { getChats, deleteChat } = useRematchDispatch((dispatch) => ({
+    getChats: dispatch.chat.getChats,
+    deleteChat: dispatch.chat.deleteChat,
   }));
 
   const { handleSubmit, errors, control, setValue } = useForm();
   const onSearch = async ({ query }) => {
     try {
-      await getTemplates({ keyword: query });
+      await getChats({ keyword: query });
     } catch (err) {
       toast.error(err.message);
     }
@@ -62,7 +42,7 @@ const Templates = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure want to delete this item?')) {
       try {
-        await deleteTemplate({ id });
+        await deleteChat({ id });
         toast.success('Deleted');
       } catch (err) {
         toast.error(err.message);
@@ -71,7 +51,7 @@ const Templates = () => {
   };
 
   React.useEffect(() => {
-    getTemplates({ keyword: '' });
+    getChats({ keyword: '' });
   }, []);
 
   React.useEffect(() => {
@@ -83,18 +63,11 @@ const Templates = () => {
       <Level>
         <Level.Side align="left">
           <Level.Item>
-            <Heading weight="light">Templates</Heading>
-          </Level.Item>
-        </Level.Side>
-        <Level.Side align="right">
-          <Level.Item>
-            <Link to={`/templates/create`}>
-              <Button color="primary">Create</Button>
-            </Link>
+            <Heading weight="light">Chats</Heading>
           </Level.Item>
         </Level.Side>
       </Level>
-      <form onSubmit={handleSubmit(onSearch)}>
+      {/* <form onSubmit={handleSubmit(onSearch)}>
         <Form.Control style={{ marginBottom: '1rem' }}>
           <Controller as={Form.Input} name="query" placeholder="Cari..." control={control} className="is-shadowless" />
         </Form.Control>
@@ -105,7 +78,7 @@ const Templates = () => {
               <a
                 href="javascript:void(0)"
                 onClick={() => {
-                  getTemplates({ keyword: '' });
+                  getChats({ keyword: '' });
                 }}
               >
                 (reset)
@@ -115,34 +88,50 @@ const Templates = () => {
             <span>Total: {total} </span>
           )}
         </p>
-      </form>
+      </form> */}
       <Table bordered>
-        {templates.map((tmp) => (
+        <thead>
           <tr>
-            <td>
-              {/* <Link to={`/templates/${tmp._id}`}>{tmp.name}</Link> */}
-              <ExpandableLink name={tmp.name} content={tmp.text} timestamp={tmp.updatedAt} />
+            <th>Status</th>
+            <th>Kategori</th>
+            <th>Customer</th>
+            <th>Operator</th>
+            <th>Awal Chat</th>
+            <th></th>
+          </tr>
+        </thead>
+        {chats.map((cht) => (
+          <tr>
+            <td className={`is-uppercase ${cht.state == 'open' ? 'has-text-success' : ''}`}>
+              <span className="has-text-weight-medium">{cht.state}</span>
             </td>
+            <td>{cht.category?.name}</td>
+            <td>
+              <Link to={`/customers/${cht.customer?._id}`}>
+                <span className="has-text-weight-medium">{cht.customer?.fullname || '?'}</span>
+              </Link>
+              <br />
+              <span className="has-text-grey-light">{cht.customer?.phonenumber}</span>
+            </td>
+            <td>{cht.operator?.fullname}</td>
+            <td>{dayjs(cht.createdAt).format('DD/MMM/YY HH:mm')}</td>
             <td class="is-narrow">
-              <ActionButton onClick={() => toggleEnabled({ id: tmp._id, enabled: !tmp.enabled })}>
-                <ToggleInput active={tmp.enabled} />
-              </ActionButton>
-              <ActionButton onClick={() => history.push(`/templates/${tmp._id}/edit`)}>
+              {/* <ActionButton onClick={() => history.push(`/chats/${cht._id}/edit`)}>
                 <FiEdit />
-              </ActionButton>
-              <ActionButton onClick={() => handleDelete(tmp._id)}>
+              </ActionButton> */}
+              <ActionButton onClick={() => handleDelete(cht._id)}>
                 <FiTrash2 />
               </ActionButton>
             </td>
           </tr>
         ))}
-        {templates.length == 0 && !loading && <p>Data Not Found</p>}
+        {chats.length == 0 && !loading && <p>Data Not Found</p>}
       </Table>
       <Pagination
         current={page}
         total={total > 0 ? Math.ceil(total / limit) : 0}
         delta={2}
-        onChange={(page) => getTemplates({ page: page })}
+        onChange={(page) => getChats({ page: page })}
       />
       {loading && (
         <p>
@@ -153,4 +142,4 @@ const Templates = () => {
   );
 };
 
-export default Templates;
+export default Chats;

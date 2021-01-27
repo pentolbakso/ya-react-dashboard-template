@@ -6,10 +6,12 @@ import userRoutes from './user.routes';
 import categoryRoutes from './category.routes';
 import templateRoutes from './template.routes';
 import customerRoutes from './customer.routes';
+import chatRoutes from './chat.routes';
 
 const Login = React.lazy(() => import('../../pages/auth/Login'));
 const Dashboard = React.lazy(() => import('../../pages/dashboard'));
 const EditAccount = React.lazy(() => import('../../pages/account/EditAccount'));
+const Whatsapp = React.lazy(() => import('../../pages/whatsapp'));
 
 const indexRoutes = {
   path: '/',
@@ -34,6 +36,14 @@ const dashboardRoutes = {
   path: '/dashboard',
   name: 'Dashboard',
   component: Dashboard,
+  route: PrivateRoute,
+  exact: true,
+};
+
+const whatsappRoutes = {
+  path: '/whatsapp',
+  name: 'whatsapp',
+  component: Whatsapp,
   route: PrivateRoute,
   exact: true,
 };
@@ -67,6 +77,8 @@ const flattenPrivateRoutes = flattenRoutes([
   categoryRoutes,
   templateRoutes,
   customerRoutes,
+  chatRoutes,
+  whatsappRoutes,
 ]);
 
 export { flattenPublicRoutes, flattenPrivateRoutes };
