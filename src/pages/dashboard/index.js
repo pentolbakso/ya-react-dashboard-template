@@ -35,12 +35,12 @@ const Dashboard = () => {
         </Columns.Column>
         <Columns.Column size={6}>
           <Box>
-            <Heading size={5}>(0) Places</Heading>
+            <Heading size={5}>Customers</Heading>
             <Button.Group>
-              <Button onClick={() => history.push('/places')} text>
+              <Button onClick={() => history.push('/customers')} text>
                 Browse
               </Button>
-              <Button onClick={() => history.push('/places/create')} text>
+              <Button onClick={() => history.push('/customers/create')} text>
                 Create
               </Button>
             </Button.Group>
@@ -49,6 +49,7 @@ const Dashboard = () => {
         <Columns.Column size={6}>
           <Box>
             <Heading size={5}>Data</Heading>
+            <p>Lorem ipsum</p>
           </Box>
         </Columns.Column>
       </Columns>
