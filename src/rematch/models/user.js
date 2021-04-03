@@ -5,8 +5,7 @@ const user = {
     items: [],
     page: 1,
     total: null,
-    limit: 5,
-    current: null, // currently opened for detail
+    limit: 10,
     keyword: null, // for search
   },
   reducers: {
@@ -28,9 +27,6 @@ const user = {
     },
     removeItem(state, id) {
       return { ...state, items: state.items.filter((n) => n._id !== id) };
-    },
-    setCurrent(state, current) {
-      return { ...state, current };
     },
     setPage(state, page) {
       return { ...state, page };
@@ -63,12 +59,11 @@ const user = {
     async getUser({ id }, rootState) {
       const item = rootState.user.items.find((f) => f._id === id);
       if (item) {
-        this.setCurrent(item);
         return item;
       }
       // if not found in store
       const resp = await api.getUser(id);
-      this.setCurrent(resp.data);
+      this.addItem(resp.data);
       return resp.data;
     },
     async createUser(params) {

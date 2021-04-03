@@ -104,14 +104,16 @@ const Customers = () => {
       <Table bordered>
         <thead>
           <tr>
+            <th style={{ width: '1%', whiteSpace: 'nowrap' }}>#</th>
             <th>Name</th>
             <th>Phone</th>
             <th>Age / City</th>
             <th></th>
           </tr>
         </thead>
-        {customers.map((cust) => (
+        {customers.map((cust, idx) => (
           <tr>
+            <td>{(page - 1) * limit + idx + 1}</td>
             <td>
               <Link to={`/customers/${cust._id}`}>{cust.fullname}</Link>
             </td>

@@ -105,6 +105,7 @@ const Users = () => {
       <Table bordered>
         <thead>
           <tr>
+            <th style={{ width: '1%', whiteSpace: 'nowrap' }}>#</th>
             <th>Name</th>
             <th>Email</th>
             <th>Phonenumber</th>
@@ -112,8 +113,9 @@ const Users = () => {
             <th></th>
           </tr>
         </thead>
-        {users.map((user) => (
+        {users.map((user, idx) => (
           <tr>
+            <td>{(page - 1) * limit + idx + 1}</td>
             <td>
               <Link to={`/users/${user._id}`}>{user.fullname}</Link>
             </td>

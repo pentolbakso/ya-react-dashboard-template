@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Container from 'react-bulma-components/lib/components/container';
 import Loader from 'react-bulma-components/lib/components/loader';
 import Heading from 'react-bulma-components/lib/components/heading';
@@ -6,13 +6,12 @@ import Button from 'react-bulma-components/lib/components/button';
 import Level from 'react-bulma-components/lib/components/level';
 import useRematchDispatch from '../../hooks/useRematchDispatch';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import List from 'react-bulma-components/lib/components/list';
 import ListMeta from 'components/ListMeta';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const UserDetail = () => {
   const { id } = useParams();
@@ -22,8 +21,9 @@ const UserDetail = () => {
     getUser: dispatch.user.getUser,
     deleteUser: dispatch.user.deleteUser,
   }));
-  const current = useSelector((state) => state.user.current);
+  const users = useSelector((state) => state.user.items);
   const loading = useSelector((state) => state.loading.effects.getUser);
+  const current = useMemo(() => users.find((it) => it._id == id), [users]);
 
   React.useEffect(() => {
     if (id) getUser({ id });

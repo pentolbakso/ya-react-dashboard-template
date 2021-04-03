@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Button from 'react-bulma-components/lib/components/button';
 import * as Form from 'react-bulma-components/lib/components/form';
 import Container from 'react-bulma-components/lib/components/container';
@@ -7,8 +7,7 @@ import { useForm, Controller } from 'react-hook-form';
 import useRematchDispatch from '../../hooks/useRematchDispatch';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import SelectController from 'components/SelectController';
 
 const genders = [
@@ -35,10 +34,12 @@ const CustomerForm = () => {
     updateCustomer: dispatch.customer.updateCustomer,
     getCustomer: dispatch.customer.getCustomer,
   }));
+
+  const customers = useSelector((state) => state.customer.items);
   const loading = useSelector(
     (state) => state.loading.effects.customer.createCustomer || state.loading.effects.customer.updateCustomer
   );
-  const current = useSelector((state) => state.customer.current);
+  const current = useMemo(() => customers.find((it) => it._id == id), [customers]);
 
   const { handleSubmit, errors, control, setValue } = useForm();
   const onSubmit = async (params) => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Button from 'react-bulma-components/lib/components/button';
 import * as Form from 'react-bulma-components/lib/components/form';
 import Container from 'react-bulma-components/lib/components/container';
@@ -7,8 +7,7 @@ import { useForm, Controller } from 'react-hook-form';
 import useRematchDispatch from '../../hooks/useRematchDispatch';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import SelectController from 'components/SelectController';
 
 const roles = [
@@ -35,10 +34,11 @@ const UserForm = () => {
     updateUser: dispatch.user.updateUser,
     getUser: dispatch.user.getUser,
   }));
+  const users = useSelector((state) => state.user.items);
   const loading = useSelector(
     (state) => state.loading.effects.user.createUser || state.loading.effects.user.updateUser
   );
-  const current = useSelector((state) => state.user.current);
+  const current = useMemo(() => users.find((it) => it._id == id), [users]);
 
   const { handleSubmit, errors, control, setValue } = useForm();
   const onSubmit = async (params) => {
