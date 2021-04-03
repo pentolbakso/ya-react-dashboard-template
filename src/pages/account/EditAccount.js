@@ -65,7 +65,7 @@ const EditAccount = () => {
         <Form.Field>
           <Form.Control>
             <Form.Label>Password (input only if you want to change the password)</Form.Label>
-            <Controller as={Form.Input} name="password" type="password" control={control} />
+            <Controller as={Form.Input} name="password" type="password" control={control} autoComplete="new-password" />
           </Form.Control>
         </Form.Field>
         <Form.Control>

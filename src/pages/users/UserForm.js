@@ -76,7 +76,7 @@ const UserForm = () => {
             <Controller
               as={Form.Input}
               name="fullname"
-              placeholder="misal: Abu Yahya"
+              placeholder="eg: Abu Fulan"
               control={control}
               rules={{ required: true }}
             />
@@ -92,7 +92,7 @@ const UserForm = () => {
         <Form.Field>
           <Form.Control>
             <Form.Label>Phonenumber</Form.Label>
-            <Controller as={Form.Input} name="phonenumber" placeholder="misal: 62812112233" control={control} />
+            <Controller as={Form.Input} name="phonenumber" placeholder="eg: 62812112233" control={control} />
           </Form.Control>
         </Form.Field>
         <Form.Field>
@@ -111,7 +111,14 @@ const UserForm = () => {
         <Form.Field>
           <Form.Control>
             <Form.Label>Password {id ? '(fill blank if you dont want to change the password)' : '*'}</Form.Label>
-            <Controller as={Form.Input} name="password" type="password" control={control} rules={{ required: !id }} />
+            <Controller
+              as={Form.Input}
+              name="password"
+              type="password"
+              control={control}
+              rules={{ required: !id }}
+              autoComplete="new-password"
+            />
           </Form.Control>
           {errors.password && <Form.Help color="danger">Please input a valid value</Form.Help>}
         </Form.Field>
